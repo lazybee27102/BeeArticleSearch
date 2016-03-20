@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.coderschool.beeiscoding.beearticlesearch.Article;
+import com.coderschool.beeiscoding.beearticlesearch.TopNews;
 import com.coderschool.beeiscoding.beearticlesearch.R;
 
 import java.util.ArrayList;
@@ -21,15 +21,15 @@ import java.util.ArrayList;
 public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int MAIN_ARTICLE = 1;
     private static final int NORMAL_ARTICLE = 2;
-    private Article main_article;
-    private ArrayList<Article> normalArticles;
+    private TopNews main_topNews;
+    private ArrayList<TopNews> normalTopNewses;
     private Context context;
     private LayoutInflater inflater;
 
-    public ArticleAdapter(Context context, ArrayList<Article> normalArticles, Article main_article) {
+    public ArticleAdapter(Context context, ArrayList<TopNews> normalTopNewses, TopNews main_topNews) {
         this.context = context;
-        this.normalArticles = normalArticles;
-        this.main_article = main_article;
+        this.normalTopNewses = normalTopNewses;
+        this.main_topNews = main_topNews;
         inflater = LayoutInflater.from(context);
     }
 
@@ -63,7 +63,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return normalArticles.size()+1;
+        return normalTopNewses.size()+1;
     }
 
     public class MainArticleViewHolder extends RecyclerView.ViewHolder {
