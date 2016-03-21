@@ -47,11 +47,11 @@ and so on...
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-- [Giphy] <img src='http://gph.is/1ZiOoWa' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+- [Giphy] (http://giphy.com/gifs/26u6cJv7dgGFe2aaY)
 - [Youtube](https://youtu.be/ynOC0edITtI)
 
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
 
 ## Notes
 
