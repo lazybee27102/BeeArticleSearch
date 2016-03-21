@@ -16,14 +16,17 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textView_index"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="There is no article about this today"
+        android:id="@+id/textView_no_article"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#000000"
+        android:visibility="gone" />
+
 </RelativeLayout>

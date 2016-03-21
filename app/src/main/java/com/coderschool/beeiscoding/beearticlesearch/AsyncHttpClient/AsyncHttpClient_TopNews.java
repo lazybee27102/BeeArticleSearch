@@ -1,5 +1,6 @@
 package com.coderschool.beeiscoding.beearticlesearch.AsyncHttpClient;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -23,7 +24,7 @@ public class AsyncHttpClient_TopNews {
     private String title;
     private static final String API_KEY_TOP_NEWS = "59cc3a1f67c3f3ebc9994106024cd05f:12:74744947";
     private getResponse delegate;
-    private ArrayList<TopNews> topNewses = new ArrayList<>();
+    private ArrayList<TopNews> topNewses;
     private Context context;
 
     public AsyncHttpClient_TopNews(Context context,String title,getResponse delegate) {
@@ -46,20 +47,29 @@ public class AsyncHttpClient_TopNews {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Log.d("DEBUG_VALUE", title);
                 try {
                     JSONArray array = response.getJSONArray("results");
-                    for (int i = 0; i < array.length() && i < 10; i++) {
+                    topNewses = new ArrayList<TopNews>();
+                    for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-                        TopNews topNews = new TopNews();
-                        topNews.setSubSection(object.getString("subsection"));
-                        topNews.setAuthor(object.getString("byline"));
-                        topNews.setPubdate(object.getString("published_date"));
-                        topNews.setTitle(object.getString("title"));
-                        topNews.setImageURL(object.getJSONArray("multimedia").getJSONObject(3).getString("url"));
-                        topNewses.add(topNews);
+                        if(!object.get("multimedia").equals("") && topNewses.size() <= 10)
+                        {
+                            TopNews topNews = new TopNews();
+                            topNews.setSubSection(object.getString("subsection"));
+                            topNews.setAuthor(object.getString("byline"));
+                            topNews.setPubdate(object.getString("published_date"));
+                            topNews.setTitle(object.getString("title"));
+                            topNews.setImageURL(object.getJSONArray("multimedia").getJSONObject(3).getString("url"));
+                            topNews.setWebURL(object.getString("url"));
+                            topNews.setImageHighQuality(object.getJSONArray("multimedia").getJSONObject(4).getString("url"));
+                            topNewses.add(topNews);
+                        }
+
+
+
                     }
                     delegate.handleResponse(topNewses);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

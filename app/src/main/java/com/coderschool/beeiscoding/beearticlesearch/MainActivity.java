@@ -1,39 +1,23 @@
 package com.coderschool.beeiscoding.beearticlesearch;
 
-import android.graphics.drawable.Drawable;
-import android.support.design.widget.CollapsingToolbarLayout;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Time;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.coderschool.beeiscoding.beearticlesearch.CustomRecyclerView.ArticleAdapter;
+import com.coderschool.beeiscoding.beearticlesearch.FilterResult.FoundArticlesActivity;
 import com.coderschool.beeiscoding.beearticlesearch.Tab.ViewPagerAdapter;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import org.json.JSONObject;
-
-import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
     //APIKEY
-    private static final String API_KEY = "95cd7c55cbeb555630d6e03f0406648d:4:74744947";
-    private static final String url = "http://api.nytimes.com/svc/search/v2/articlesearch.json";
-    private CollapsingToolbarLayout collapsingToolbarLayout;
+
     private Toolbar toolbar;
-    private RecyclerView recyclerView;
-    private ArticleAdapter articleAdapter;
     private ImageView imageView_expanded;
     private TabLayout tablayout;
     private ViewPager viewPager;
@@ -46,41 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         registerWidgets();
         HandleWidget();
-
-
-
-
     }
-
-
 
 
     private void HandleWidget() {
-        tablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                tab.getPosition();
-                int id = getResources().getIdentifier(tab.getText().toString(), "drawable", getPackageName());
-                if (tab.getPosition() != 0)
-                    imageView_expanded.setBackgroundResource(id);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-
     }
 
     private void registerWidgets() {
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         imageView_expanded = (ImageView) findViewById(R.id.expandedImage);
         imageView_expanded.setBackgroundResource(R.drawable.home);
         //Tab
@@ -110,11 +66,19 @@ public class MainActivity extends AppCompatActivity {
                 if (!searchView.isIconified())
                     searchView.setIconified(true);
                 menuItem.collapseActionView();
+
+                if (!query.equals("") && query.length() != 0) {
+                    Intent i = new Intent(MainActivity.this,FoundArticlesActivity.class);
+                    i.putExtra("QUERY",query);
+                    startActivity(i);
+
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
                 return false;
             }
         });
@@ -126,5 +90,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    public ImageView getImageView_expanded() {
+        return imageView_expanded;
     }
 }

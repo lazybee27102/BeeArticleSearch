@@ -1,6 +1,38 @@
 <resources>
     <string name="app_name">Search Articles</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholderpicasso text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="timeArray">
+        <item>All time</item>
+        <item>Today</item>
+        <item>This week</item>
+        <item>This month</item>
+        <item>This year</item>
+
+    </string-array>
+
+    <string-array name="sectionArray">
+        <item>Arts</item>
+        <item>Books</item>
+        <item>Business</item>
+        <item>Dining</item>
+        <item>Education</item>
+        <item>Environment</item>
+        <item>Fashion</item>
+        <item>Food</item>
+        <item>Health</item>
+        <item>Magazine</item>
+        <item>Media</item>
+        <item>Movies</item>
+        <item>Politics</item>
+        <item>Science</item>
+        <item>Society</item>
+        <item>Sports</item>
+        <item>Technology</item>
+        <item>Travel</item>
+        <item>Working</item>
+        <item>World</item>
+    </string-array>
 </resources>

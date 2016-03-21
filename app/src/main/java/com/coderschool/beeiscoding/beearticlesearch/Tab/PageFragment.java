@@ -3,16 +3,16 @@ package com.coderschool.beeiscoding.beearticlesearch.Tab;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.coderschool.beeiscoding.beearticlesearch.AsyncHttpClient.AsyncHttpClient_TopNews;
-import com.coderschool.beeiscoding.beearticlesearch.CustomRecyclerView.ArticleAdapter;
+import com.coderschool.beeiscoding.beearticlesearch.CustomRecyclerView.TopNewsAdapter;
+import com.coderschool.beeiscoding.beearticlesearch.MainActivity;
 import com.coderschool.beeiscoding.beearticlesearch.R;
 import com.coderschool.beeiscoding.beearticlesearch.TopNews;
 
@@ -24,10 +24,11 @@ import java.util.ArrayList;
 public class PageFragment extends Fragment {
     public static final String argument_fragment_title = "argument_fragment_title";
     private RecyclerView recyclerView;
-    private ArticleAdapter adapter;
+    private TopNewsAdapter adapter;
     private ArrayList<TopNews> normal_topNewses;
     private TopNews main_articles;
     private String section;
+    private TextView textView_noArticles;
 
     public PageFragment() {
         // Required empty public constructor
@@ -52,39 +53,55 @@ public class PageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_page, container, false);
-       /* AsyncHttpClient_TopNews asyncHttpClient_topNews = new AsyncHttpClient_TopNews(title, new AsyncHttpClient_TopNews.getResponse() {
+        //Log.d("DEBUG_VAL","onCreateView");
+
+
+        View rootView =  inflater.inflate(R.layout.fragment_page, container, false);
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView_articles);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        textView_noArticles = (TextView)rootView.findViewById(R.id.textView_no_article);
+
+        AsyncHttpClient_TopNews asyncHttpClient_topNews = new AsyncHttpClient_TopNews(getContext(), getArguments().getString(argument_fragment_title), new AsyncHttpClient_TopNews.getResponse() {
             @Override
             public void handleResponse(ArrayList<TopNews> arrayList) {
-                Toast.makeText(getActivity(), arrayList.get(0).getTitle() + arrayList.get(0).getImageURL()+"", Toast.LENGTH_SHORT).show();
+                if(arrayList.size()!=0)
+                {
+                    adapter = new TopNewsAdapter(getContext(),arrayList);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    textView_noArticles.setVisibility(View.GONE);
+                    recyclerView.setAdapter(adapter);
+                }else
+                {
+                    recyclerView.setVisibility(View.GONE);
+                    textView_noArticles.setVisibility(View.VISIBLE);
+                }
+
+
             }
         });
-        asyncHttpClient_topNews.callRequest();*/
+        asyncHttpClient_topNews.callRequest();
+        return rootView;
 
-
-        //RecyclerView
-
-
-        //recyclerView = (RecyclerView)v.findViewById(R.id.recyclerView_articles);
-        //adapter = new ArticleAdapter(getContext(), normal_topNewses,main_articles);
-        //recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView textView = (TextView)view.findViewById(R.id.textView_index);
-        textView.setText(getArguments().getString(argument_fragment_title));
-        Toast.makeText(getContext(), textView.getText(), Toast.LENGTH_SHORT).show();
-        /*if(adapter==null)
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser)
         {
-            AsyncHttpClient_TopNews asyncHttpClient_topNews = new AsyncHttpClient_TopNews(getContext(), getArguments().getString(argument_fragment_title), new AsyncHttpClient_TopNews.getResponse() {
-                @Override
-                public void handleResponse(ArrayList<TopNews> arrayList) {
-                    //Log.d("DEBUGVAL",arrayList.get(0).getTitle());
-                }
-            });
-            asyncHttpClient_topNews.callRequest();
-        }*/
+            String title = getArguments().getString(argument_fragment_title);
+            int idResource = getActivity().getResources().getIdentifier(title, "drawable", getActivity().getPackageName());
+            ((MainActivity)this.getActivity()).getImageView_expanded().setBackgroundResource(idResource);
+
+        }
+
     }
 }

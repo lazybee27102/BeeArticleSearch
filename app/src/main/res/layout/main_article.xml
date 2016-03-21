@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="278dp">
+    android:layout_height="278dp"
+    android:layout_marginBottom="10dp">
 
 
     <RelativeLayout
         android:id="@+id/layoutTop"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@android:color/holo_red_light">
+        android:layout_height="250dp">
 
 
         <ImageView
@@ -17,53 +17,66 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:scaleType="fitXY" />
 
-        <TextView
-            android:id="@+id/textView_main_article_publishdate"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:singleLine="true"
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#ffffff" />
+            android:orientation="vertical"
+            android:background="#77000000"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp">
 
-        <TextView
-            android:id="@+id/textView_main_article_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:singleLine="true"
-            android:text="Title"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#ffffff" />
+            <TextView
+                android:id="@+id/textView_main_article_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type"
+                android:textAppearance="?android:attr/textAppearanceMediumInverse"
+                android:textColor="#ffc107"
+                android:layout_marginLeft="10dp"
+                android:padding="2dp" />
 
-        <TextView
-            android:id="@+id/textView_main_article_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_main_article_title"
-            android:layout_marginLeft="10dp"
-            android:text="Type"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ffffff" />
+            <TextView
+                android:id="@+id/textView_main_article_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Title"
+                android:textAppearance="?android:attr/textAppearanceMediumInverse"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="10dp"
+                android:padding="2dp" />
+
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layoutBottom"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/layoutTop"></RelativeLayout>
+        android:layout_height="28dp"
+        android:layout_below="@id/layoutTop"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:id="@+id/textView_main_article_publishdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffffff"
+            android:padding="2dp"
+            android:textStyle="italic"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp" />
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_main_article_go"
