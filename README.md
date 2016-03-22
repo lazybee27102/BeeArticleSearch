@@ -48,7 +48,7 @@ and so on...
 
 Here's a walkthrough of implemented user stories:
 - First version:Test on Genymotion: [Giphy] (http://giphy.com/gifs/26u6cJv7dgGFe2aaY)
-- Latest version: Test on real phone: [Youtube](https://youtu.be/15H-4SJkUxc) 
+- Latest version: Test on real device: [Youtube](https://youtu.be/UbRuD3S00bw) 
 
 
 
